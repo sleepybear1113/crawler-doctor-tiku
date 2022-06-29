@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>题库</title>
+</head>
+<script src="axios.min.js"></script>
+<body>
+<label for="key">key</label><input id="key">
+<br/>
+<label for="examId">examId</label><input id="examId">
+<br/>
+<label for="courseId">courseId</label><input id="courseId">
+<br/>
+<label for="paperId">paperId</label><input id="paperId">
+<br/>
+<label for="qid">qid</label><input id="qid">
+<br/>
+<button onclick="go()">go</button>
+<hr>
+<label for="delay">delay</label><input id="delay">
+<button onclick="delayChange()">修改延时</button>
+<br/>
+</body>
+<script>
+
+
+    function go() {
+        let examId = document.getElementById("examId").value;
+        let courseId = document.getElementById("courseId").value;
+        let paperId = document.getElementById("paperId").value;
+        let qid = document.getElementById("qid").value;
+        let key = document.getElementById("key").value;
+        console.log(examId, courseId, paperId, qid);
+        if (examId === "" || courseId === "" || paperId === "" || qid === "") {
+            alert("有id为空");
+            return;
+        }
+        axios.get("go", {
+            params: {
+                examId: examId,
+                courseId: courseId,
+                paperId: paperId,
+                qid: qid,
+                key: key
+            }
+        }).then(res => {
+            alert("正在运行，请查看控制台黑框情况")
+        });
+    }
+
+    function delayChange() {
+        let delay = document.getElementById("delay").value;
+
+        axios.get("delay", {
+            params: {
+                delay: delay
+            }
+        }).then(res => {
+            alert("修改成功")
+        });
+    }
+
+</script>
+</html>
